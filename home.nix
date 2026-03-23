@@ -64,6 +64,7 @@
     pcmanfm-qt
     qt6Packages.qt6ct
     adwaita-qt
+    wl-clipboard
   ];
 
   programs.fish = {
@@ -102,7 +103,7 @@
     };
     cursorTheme = {
       name = "ShihoStatic";
-      size = 32;
+      size = 64;
     };
   };
 
@@ -196,7 +197,11 @@
         if [ -f "$HOME/.hm-session-vars.sh" ]; then
           . "$HOME/.hm-session-vars.sh"
         fi
-        exec dbus-run-session niri
+
+        if [ -z "$DBUS_SESSION_BUS_ADDRESS" ]; then
+          eval $(dbus-launch --sh-syntax --exit-with-session)
+        fi
+        exec niri
       '';
       executable = true;
     };
