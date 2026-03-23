@@ -57,9 +57,13 @@
     zoxide
     fish
     starship
+    unzip
+    kdePackages.ark
 
     # compositor
-    fuzzel
+    pcmanfm-qt
+    qt6Packages.qt6ct
+    adwaita-qt
   ];
 
   programs.fish = {
@@ -73,12 +77,42 @@
       cd = "z";
       cdi = "zi";
     };
+    loginShellInit = ''
+      if test -f $HOME/.hm-session-vars.sh
+        source $HOME/.hm-session-vars.sh
+      end
+    '';
     interactiveShellInit = ''
       set -g fish_greeting ""
       if test -e ~/.nix-profile/etc/profile.d/nix.fish
         source ~/.nix-profile/etc/profile.d/nix.fish
       end
     '';
+  };
+
+  gtk = {
+    enable = true;
+    theme = {
+      name = "Adwaita-dark";
+      package = pkgs.gnome-themes-extra;
+    };
+    iconTheme = {
+      name = "Adwaita";
+      package = pkgs.gnome-themes-extra;
+    };
+    cursorTheme = {
+      name = "ShihoStatic";
+      size = 32;
+    };
+  };
+
+  dconf = {
+    enable = true;
+    settings = {
+      "org/gnome/desktop/interface" = {
+        color-scheme = "prefer-dark";
+      };
+    };
   };
 
   programs.zoxide = {
@@ -156,6 +190,23 @@
     #   org.gradle.console=verbose
     #   org.gradle.daemon.idletimeout=3600000
     # '';
+    ".config/niri/start.sh" = {
+      text = ''
+        #!/bin/sh
+        if [ -f "$HOME/.hm-session-vars.sh" ]; then
+          . "$HOME/.hm-session-vars.sh"
+        fi
+        exec dbus-run-session niri
+      '';
+      executable = true;
+    };
+  };
+
+  home.sessionVariables = {
+    EDITOR = "nvim";
+    GTK_THEME = "Adwaita:dark";
+    XCURSOR_THEME = "ShihoStatic";
+    XCURSOR_SIZE = "32";
   };
 
   home.sessionPath = [
