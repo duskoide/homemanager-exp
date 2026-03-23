@@ -58,8 +58,8 @@
     fish
     starship
 
-    # etc
-    steam-devices-udev-rules
+    # compositor
+    fuzzel
   ];
 
   programs.fish = {
@@ -70,6 +70,8 @@
       lg = "lazygit";
       editconfig = "nvim ~/homemanager/home.nix";
       editflake = "nvim ~/homemanager/flake.nix";
+      cd = "z";
+      cdi = "zi";
     };
     interactiveShellInit = ''
       set -g fish_greeting ""
