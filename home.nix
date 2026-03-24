@@ -64,6 +64,7 @@
     qt6Packages.qt6ct
     adwaita-qt
     wl-clipboard
+    swayidle
   ];
 
   programs.fish = {
