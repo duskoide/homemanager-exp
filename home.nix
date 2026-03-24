@@ -207,6 +207,7 @@
   };
 
   home.sessionVariables = {
+    SUDO_EDITOR = "nvim";
     EDITOR = "nvim";
     GTK_THEME = "Adwaita:dark";
     XCURSOR_THEME = "ShihoStatic";
