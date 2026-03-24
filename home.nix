@@ -50,7 +50,6 @@
     ripgrep
     bat
     zellij
-    rofi
     btop
     fastfetch
     yazi
@@ -59,6 +58,8 @@
     starship
     unzip
     kdePackages.ark
+    foot
+    chafa
 
     # compositor
     qt6Packages.qt6ct
@@ -78,6 +79,7 @@
       editflake = "nvim ~/homemanager/flake.nix";
       cd = "z";
       cdi = "zi";
+      icat = "chafa --format=sixel"
     };
     loginShellInit = ''
       if test -f $HOME/.hm-session-vars.sh
@@ -90,22 +92,6 @@
         source ~/.nix-profile/etc/profile.d/nix.fish
       end
     '';
-  };
-
-  gtk = {
-    enable = true;
-    theme = {
-      name = "Adwaita-dark";
-      package = pkgs.gnome-themes-extra;
-    };
-    iconTheme = {
-      name = "Adwaita";
-      package = pkgs.gnome-themes-extra;
-    };
-    cursorTheme = {
-      name = "ShihoStatic";
-      size = 64;
-    };
   };
 
   dconf = {
