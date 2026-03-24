@@ -65,6 +65,7 @@
     adwaita-qt
     wl-clipboard
     swayidle
+    mako
   ];
 
   programs.fish = {
