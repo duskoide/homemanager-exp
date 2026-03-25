@@ -66,7 +66,6 @@
     adwaita-qt
     wl-clipboard
     swayidle
-    mako
   ];
 
   programs.fish = {
@@ -79,7 +78,8 @@
       editflake = "nvim ~/homemanager/flake.nix";
       cd = "z";
       cdi = "zi";
-      icat = "chafa --format=sixel"
+      archlinux = "distrobox enter arch";
+      icat = "chafa --format=sixel";
     };
     loginShellInit = ''
       if test -f $HOME/.hm-session-vars.sh
