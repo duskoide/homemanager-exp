@@ -71,15 +71,17 @@
   programs.fish = {
     enable = true;
     shellAbbrs = {
-      rebuild = "home-manager switch --flake ~/homemanager#pn";
+      rb = "home-manager switch --flake ~/homemanager#pn";
       ff = "fastfetch";
       lg = "lazygit";
-      editconfig = "nvim ~/homemanager/home.nix";
-      editflake = "nvim ~/homemanager/flake.nix";
+      ec = "nvim ~/homemanager/home.nix";
+      ef = "nvim ~/homemanager/flake.nix";
       cd = "z";
       cdi = "zi";
       archlinux = "distrobox enter arch";
       icat = "chafa --format=sixel";
+      vi = "nvim";
+      vim = "nvim";
     };
     loginShellInit = ''
       if test -f $HOME/.hm-session-vars.sh
@@ -165,6 +167,20 @@
     };
   };
 
+  xdg.portal = {
+    enable = true;
+
+    extraPortals = [ pkgs.kdePackages.xdg-desktop-portal-kde ];
+
+    config = {
+      niri = {
+        default = [ "gtk" ];
+
+        "org.freedesktop.impl.portal.FileChooser" = [ "kde" ];
+      };
+    };
+  };
+
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
   home.file = {
@@ -195,11 +211,12 @@
   };
 
   home.sessionVariables = {
-    SUDO_EDITOR = "nvim";
-    EDITOR = "nvim";
+    SUDO_EDITOR = "${pkgs.neovim}/bin/nvim";
+    EDITOR = "${pkgs.neovim}/bin/nvim";
     GTK_THEME = "Adwaita:dark";
     XCURSOR_THEME = "ShihoStatic";
     XCURSOR_SIZE = "32";
+    GTK_USE_PORTAL = "1";
   };
 
   home.sessionPath = [
